@@ -1,7 +1,6 @@
 
+import { Navbar } from "../../components/NavBar";
 import "./globals.css";
-import Posts from "./posts/page";
-
 
 export default function RootLayout({
   children,
@@ -11,9 +10,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+        className={`antialiased bg-gray-500`}
       >
-        <Posts/>
+        <Navbar/>
         {children}
       </body>
     </html>

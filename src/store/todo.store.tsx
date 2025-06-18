@@ -4,7 +4,6 @@ import { persist } from 'zustand/middleware';
 interface Todo {
   id: string;
   content: string;
-  completed: boolean;
 }
 
 interface TodoStore {
@@ -25,7 +24,7 @@ export const useTodoStore = create<TodoStore>()(
       toggleTodo: (id) =>
         set((state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            todo.id === id ? { ...todo} : todo
           ),
         })),
       removeTodo: (id) =>

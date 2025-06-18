@@ -9,7 +9,7 @@ interface Post{
 
 interface PostStore {
     posts: Post[]
-    addPost: (post: Post) => void;
+    addPost: (title: string, body: string) => void;
     removePost: (id: string) => void;
 }
 
@@ -17,9 +17,9 @@ export const usePostStore = create<PostStore>()(
     persist(
       (set) => ({
         posts: [],
-        addPost: (post) =>
+        addPost: (title, body) =>
           set((state) => ({
-            posts: [...state.posts, { id: Date.now().toString(), title: post.title, body: post.body}],
+            posts: [...state.posts, { id: Date.now().toString(), title, body}],
           })),
         removePost: (id) =>
           set((state) => ({
@@ -27,7 +27,7 @@ export const usePostStore = create<PostStore>()(
           })),
       }),
       {
-        name: 'todo-storage',
+        name: 'post-storage',
       }
     )
   );
