@@ -11,6 +11,7 @@ export default function TodoList() {
   const { addTodo, removeTodo, todos } = useTodoStore();
 
   const handleAddTodo = () => {
+    if (!todo) return;
     addTodo(todo);
     setTodo("");
   };
