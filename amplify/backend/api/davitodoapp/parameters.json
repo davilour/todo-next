@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "davitodoapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authdavitodoappf833ca4d",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2025-06-24T14:45:34.593Z"
+}
