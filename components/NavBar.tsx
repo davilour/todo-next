@@ -7,7 +7,7 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '@/compon
 export function Navbar () {
     return(
         <NavigationMenu className='flex justify-center p-4 w-5xl'>
-            <NavigationMenuList>
+            {/* <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link href="/">
                     <Button>Todo List</Button>
@@ -23,7 +23,7 @@ export function Navbar () {
                     <Button>Blog</Button>
                     </Link>
                 </NavigationMenuItem>
-            </NavigationMenuList>
+            </NavigationMenuList> */}
         </NavigationMenu>
     )
 }

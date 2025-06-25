@@ -1,8 +1,9 @@
 
 import { Navbar } from "../../components/NavBar";
 import "./globals.css";
+import AmplifyConfig from "@/lib/AmplifyConfig";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,10 +11,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased bg-gray-500`}
+        className={`antialiased bg-gray-900`}
       >
-        <Navbar/>
-        {children}
+        <AmplifyConfig />
+          <>
+            <Navbar />
+            {children}
+          </>
+        
       </body>
     </html>
   );
