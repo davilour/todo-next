@@ -1,33 +1,26 @@
-import {create } from 'zustand'
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
 
-interface Post{
-    id: string;
-    title: string;
-    body: string;
+type Post = {
+  id: string;
+  content: string;
 }
 
-interface PostStore {
-    posts: Post[]
-    addPost: (title: string, body: string) => void;
-    removePost: (id: string) => void;
+type PostStore = {
+  posts: Post[];
+  addPost: (id: string, content: string) => void;
+  removePost: (id: string) => void;
 }
 
 export const usePostStore = create<PostStore>()(
-    persist(
-      (set) => ({
-        posts: [],
-        addPost: (title, body) =>
-          set((state) => ({
-            posts: [...state.posts, { id: Date.now().toString(), title, body}],
-          })),
-        removePost: (id) =>
-          set((state) => ({
-            posts: state.posts.filter((post) => post.id !== id),
-          })),
-      }),
-      {
-        name: 'post-storage',
-      }
-    )
-  );
+  (set) => ({
+    posts: [],
+    addPost: (id, content) =>
+      set((state) => ({
+        posts: [...state.posts, { id, content }],
+      })),
+    removePost: (id) =>
+      set((state) => ({
+        posts: state.posts.filter((post) => post.id !== id),
+      })),
+  }),
+);

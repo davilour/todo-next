@@ -12,25 +12,33 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { toast } from "sonner";
+import { TodoType } from "@/schemas/todo-schema";
 import { createToDos } from "../actions/todo";
 
 export const TodoForm = () => {
   const formSchema = z.object({
-    content: z.string().min(10, {
-      message: "Todo must be at least 10 characters.",
+    content: z.string().min(2, {
+      message: "Todo must be at least 2 characters.",
     }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: "",
+      content: '',
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    await createToDos(values.content);
+    const optimisticNote = {
+      content: values.content
+    };
+    await createToDos(optimisticNote);
+    form.reset({
+      content: '',
+    });
+    toast.success("Todo criada com sucesso!");
   };
 
   return (
@@ -43,10 +51,14 @@ export const TodoForm = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input className="bg-gray-200" placeholder="insert a todo here" {...field} />
+                  <Input
+                    className="bg-gray-200"
+                    placeholder="insert a to-do here"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription>This is your todo.</FormDescription>
-                <FormMessage className="text-red-500 text-sm font-medium"/>
+                <FormMessage className="text-red-500 text-sm font-medium" />
               </FormItem>
             )}
           />

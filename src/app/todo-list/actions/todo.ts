@@ -10,11 +10,14 @@ export const listToDos = async (): Promise<Todo[]> => {
   return data.listTodos.items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 };
 
-export const createToDos = async (content: string) => {
+export const createToDos = async (todo: any) => {
   await amplifyApi.graphql({
     query: mutations.createTodo,
     variables: {
-      input: { content }
+      input: {
+        ...todo,
+        content: todo.content,
+      }
     },
   });
   revalidatePath('/todo-list');
