@@ -24,8 +24,8 @@ export const EditButton = ({
   const handleEdit = () => {
     if (isEditing) {
       startTransition(async () => {
-        await EditToDos(id, content);
         setIsEditing(false);
+        await EditToDos(id, content);
         toast.success("Todo editado com sucesso!");
       });
     } else {
