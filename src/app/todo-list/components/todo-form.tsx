@@ -11,12 +11,19 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useButtonState } from "@/store/button-state";
 import z from "zod";
 import { toast } from "sonner";
-import { TodoType } from "@/schemas/todo-schema";
+import { useTodoStore } from "@/app/todo-list/store/todo.store";
+import { useTransition } from "react";
 import { createToDos } from "../actions/todo";
+import { nanoid } from "nanoid";
 
 export const TodoForm = () => {
+  const { lock, unlock } = useButtonState();
+  const [isPending, startTransition] = useTransition();
+  const { addTodo, removeTodo, updateTodo } = useTodoStore();
+
   const formSchema = z.object({
     content: z.string().min(2, {
       message: "Todo must be at least 2 characters.",
@@ -26,21 +33,39 @@ export const TodoForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      content: '',
+      content: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    lock();
     const optimisticNote = {
-      content: values.content
+      id: nanoid(),
+      content: values.content,
+      createdAt: new Date().toISOString(),
+      isPending: true,
     };
-    await createToDos(optimisticNote);
-    form.reset({
-      content: '',
+    addTodo(optimisticNote);
+    startTransition(async () => {
+      const res = await createToDos(values.content);
+      if (res?.success) {
+        toast.success("Todo criada com sucesso!");
+        updateTodo(optimisticNote.id, {
+          content: res.todo.content,
+          createdAt: res.createdAt,
+          isPending: false,
+        });
+      } else {
+        removeTodo(res.todo.id);
+        toast.success("Erro ao criar todo");
+      }
     });
-    toast.success("Todo criada com sucesso!");
+    form.reset({
+      content: "",
+    });
+    unlock();
   };
-
+  console.log;
   return (
     <div className="flex justify-center items-center">
       <Form {...form}>
@@ -53,7 +78,7 @@ export const TodoForm = () => {
                 <FormControl>
                   <Input
                     className="bg-gray-200"
-                    placeholder="insert a to-do here"
+                    placeholder="Insert a to-do here"
                     {...field}
                   />
                 </FormControl>

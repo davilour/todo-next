@@ -33,8 +33,8 @@ export function LoginForm({
       try {
         await signIn({ username: data.email, password: data.password })
         router.push('/todo-list')
-      } catch (err) {
-        toast.error('Invalid email or password')
+      } catch (err: any) {
+        toast.error(err.message)
       }
     })
   }
@@ -65,7 +65,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   {...form.register('email')}
-                  placeholder="m@example.com"
+                  placeholder="Insert a email to Login yuor account"
                   required
                 />
                 <p className="text-sm text-destructive">
@@ -75,27 +75,27 @@ export function LoginForm({
               <div className="grid gap-3">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
+                  {/* <a
                     href="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </a> */}
                 </div>
                 <Input id="password" type="password" required />
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full" onClick={onSubmit}>
-                  Login
+                <Button type="submit" className="w-full">
+                   {isPending ? 'Logging in...' : 'Login'}
                 </Button>
               </div>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+            {/* <div className="mt-4 text-center text-sm">
+              Dont have an account?{" "}
               <a href="#" className="underline underline-offset-4">
                 Sign up
               </a>
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>

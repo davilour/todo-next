@@ -1,12 +1,20 @@
-
 import { useState } from "react";
 import { DeleteButton } from "./delete-button";
 import { EditButton } from "./edit-button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const TodoItem = ({ id, content }: { id: string; content: string }) => {
+export const TodoItem = ({
+  id,
+  content,
+  isPending,
+} : {
+  id: string;
+  content: string;
+  isPending?: boolean;
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(content);
+
 
   return (
     <Card>
@@ -21,13 +29,19 @@ export const TodoItem = ({ id, content }: { id: string; content: string }) => {
           <p className="break-words">{content}</p>
         )}
         <div className="flex gap-2">
-          <DeleteButton id={id} />
-          <EditButton
-            id={id}
-            content={editContent}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-          />
+          {isPending ? (
+           <p className="text-sm text-red-600"> Salvando... </p>
+          ) : (
+            <>
+              <DeleteButton id={id}/>
+              <EditButton
+                id={id}
+                content={editContent}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+              />
+            </>
+          )}
         </div>
       </CardContent>
     </Card>

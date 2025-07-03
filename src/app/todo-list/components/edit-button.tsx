@@ -2,6 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { EditToDos } from "../actions/todo";
 import { useTransition } from "react";
+import { toast } from "sonner";
+import { useTodoStore } from "@/app/todo-list/store/todo.store";
+import { updateTodo } from "@/graphql/mutations";
 
 type EditButtonProps = {
   id: string;
@@ -23,6 +26,7 @@ export const EditButton = ({
       startTransition(async () => {
         await EditToDos(id, content);
         setIsEditing(false);
+        toast.success("Todo editado com sucesso!");
       });
     } else {
       setIsEditing(true);
