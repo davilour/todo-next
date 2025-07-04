@@ -10,7 +10,7 @@ export const TodoItem = ({
 } : {
   id: string;
   content: string;
-  isPending?: boolean;
+  isPending?: boolean | undefined;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(content);
@@ -24,6 +24,7 @@ export const TodoItem = ({
             className="border rounded p-3 w-full mb-2"
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
+            disabled={isPending}
           />
         ) : (
           <p className="break-words">{content}</p>

@@ -39,7 +39,7 @@ export const createToDos = async (content: string) => {
     }
   } 
   catch{
-    throw new Error("Erro ao criar todo (lado servidor)");
+    throw new Error("Erro ao criar todo");
   }
 };
 
