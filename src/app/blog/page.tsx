@@ -12,9 +12,9 @@ export default function Blog (){
                 <div key={post.id} onClick={() => {
                     window.location.href = `/blog/${post.id}`
                 }}>
-                    <h2>{post.title}</h2>
+                    <h2>{post.content}</h2>
                 </div>
             ))}
-        </div>
+        </div>  
     )
 }
