@@ -23,7 +23,6 @@ export const createToDos = async (content: string) => {
     });
 
     const todoResult = res.data.createTodo as Todo
-    console.log(todoResult)
 
     if (!todoResult.id) {
       throw new Error("Erro ao criar todo");

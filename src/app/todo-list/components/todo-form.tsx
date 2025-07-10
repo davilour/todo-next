@@ -66,7 +66,6 @@ export const TodoForm = () => {
     });
     unlock();
   };
-  console.log;
   return (
     <div className="flex justify-center items-center">
       <Form {...form}>
@@ -92,7 +91,6 @@ export const TodoForm = () => {
             <Button className=" bg-gray-500" type="submit">
               Submit
             </Button>
-            <SignoutButton />
           </div>
         </form>
       </Form>

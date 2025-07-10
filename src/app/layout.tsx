@@ -1,7 +1,7 @@
 import { Toaster } from "sonner";
-import { Navbar } from "../../components/NavBar";
 import "./globals.css";
 import AmplifyConfig from "@/lib/AmplifyConfig";
+import React from "react";
 
 export default async function RootLayout({
   children,
@@ -14,7 +14,6 @@ export default async function RootLayout({
         <AmplifyConfig />
         <>
           <Toaster position="top-right"  />
-          <Navbar />
           {children}
         </>
       </body>

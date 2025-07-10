@@ -1,13 +1,15 @@
-'use client'
+
+"use server"
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '@/components/ui/navigation-menu';
+import { SignoutButton } from '@/app/auth/components/signout-button';
 
-export function Navbar () {
+export async function Navbar () {
     return(
         <NavigationMenu className='flex justify-center p-4 w-5xl'>
-            {/* <NavigationMenuList>
+            <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link href="/">
                     <Button>Todo List</Button>
@@ -23,7 +25,10 @@ export function Navbar () {
                     <Button>Blog</Button>
                     </Link>
                 </NavigationMenuItem>
-            </NavigationMenuList> */}
+                  <NavigationMenuItem>
+                   <SignoutButton/>
+                </NavigationMenuItem>
+            </NavigationMenuList>
         </NavigationMenu>
     )
 }

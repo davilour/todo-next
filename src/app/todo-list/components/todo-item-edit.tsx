@@ -31,7 +31,7 @@ export const TodoItem = ({
         )}
         <div className="flex gap-2">
           {isPending ? (
-           <p className="text-sm text-red-600"> Salvando... </p>
+           <p className="text-sm text-red-600 bg-red-200 p-2 rounded"> Salvando... </p>
           ) : (
             <>
               <DeleteButton id={id}/>
