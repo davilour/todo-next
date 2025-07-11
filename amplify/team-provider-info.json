@@ -17,6 +17,12 @@
       },
       "api": {
         "davitodoapp": {}
+      },
+      "function": {
+        "autoConfirmUserTodoApp": {
+          "deploymentBucketName": "amplify-davitodoapp-staging-44c88-deployment",
+          "s3Key": "amplify-builds/autoConfirmUserTodoApp-48476579666838714453-build.zip"
+        }
       }
     }
   }

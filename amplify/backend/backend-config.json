@@ -55,11 +55,36 @@
           "EMAIL"
         ],
         "verificationMechanisms": [
-          "EMAIL"
+          "PHONE_NUMBER"
         ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "autoConfirmUserTodoApp": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_autoConfirmUserTodoApp_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "autoConfirmUserTodoApp"
+        }
+      ]
+    },
+    "AMPLIFY_function_autoConfirmUserTodoApp_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "autoConfirmUserTodoApp"
+        }
+      ]
     }
   }
 }
