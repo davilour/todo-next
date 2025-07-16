@@ -1,4 +1,7 @@
-type Todo @model @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
+type Todo
+  @model
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
   content: String!
+  owner: String @auth(rules: [{ allow: owner, operations: [read, create, update, delete] }])
 }

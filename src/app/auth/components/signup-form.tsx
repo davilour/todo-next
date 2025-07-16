@@ -54,6 +54,9 @@ export function SignupForm({
             userAttributes: {
               email: data.email,
             },
+            autoSignIn: {
+              enabled: true,
+            },
           },
         });
         toast.success("Account created successfully!");
