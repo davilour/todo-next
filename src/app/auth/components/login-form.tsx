@@ -66,7 +66,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   {...form.register("email")}
-                  placeholder="Insert a email to Login yuor account"
+                  placeholder="Insert a email to Login your account"
                   required
                 />
                 <p className="text-sm text-destructive">

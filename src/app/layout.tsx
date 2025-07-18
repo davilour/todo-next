@@ -13,7 +13,7 @@ export default async function RootLayout({
       <body className={`antialiased bg-gray-900`}>
         <AmplifyConfig />
         <>
-          <Toaster position="top-right"  />
+          <Toaster position="top-right" />
           {children}
         </>
       </body>

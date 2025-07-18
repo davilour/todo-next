@@ -1,22 +1,23 @@
 import { create } from "zustand";
 
-type Post = {
+export type Post = { 
   id: string;
+  title: string;  
   content: string;
 }
 
-type PostStore = {
+type PostStore = {   
   posts: Post[];
-  addPost: (id: string, content: string) => void;
+  addPost: (post: Post) => void;
   removePost: (id: string) => void;
 }
 
 export const usePostStore = create<PostStore>()(
   (set) => ({
     posts: [],
-    addPost: (id, content) =>
+    addPost: (post) =>
       set((state) => ({
-        posts: [...state.posts, { id, content }],
+        posts: [...state.posts, post],
       })),
     removePost: (id) =>
       set((state) => ({
