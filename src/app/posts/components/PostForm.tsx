@@ -7,10 +7,12 @@ import { usePostStore } from "../store/post.store";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTransition } from "react";
+import { createposts } from "../actions/post";
 
 export default function PostForm() {
-  const { addPost, posts } = usePostStore();
-  console.log(posts);
+  const { addPost, editPost } = usePostStore();
+  const [isPending, startTransition] = useTransition();
 
   const postSchema = z.object({
     title: z
@@ -32,7 +34,7 @@ export default function PostForm() {
   const handleAddPost = (values: z.infer<typeof postSchema>) => {
     if (!values.title || !values.content) return;
 
-    const optimisticNote = {
+    const optimisticPost = {
       id: crypto.randomUUID(),
       title: values.title.trim(),
       content: values.content.trim(),
@@ -40,9 +42,16 @@ export default function PostForm() {
       isPending: true,
     };
 
-    addPost(optimisticNote);
-    form.reset();
-    toast.success("Post criada com sucesso!");
+    addPost(optimisticPost);
+    startTransition(async () => {
+      const result = await createposts(values.title, values.content);
+
+      editPost(optimisticPost.id, {
+          ...result.post,
+        });
+        form.reset()
+        toast.success("Post criada com sucesso!");
+    });
   };
 
   return (
@@ -64,7 +73,7 @@ export default function PostForm() {
         onClick={form.handleSubmit(handleAddPost)}
         className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
       >
-        Add
+        {isPending ? "Adding..." : "Add"}
       </Button>
     </div>
   );

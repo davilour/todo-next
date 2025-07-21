@@ -10,6 +10,7 @@ type PostStore = {
   posts: Post[];
   addPost: (post: Post) => void;
   removePost: (id: string) => void;
+  editPost: (id: string, post: Post) => void;
 }
 
 export const usePostStore = create<PostStore>()(
@@ -22,6 +23,12 @@ export const usePostStore = create<PostStore>()(
     removePost: (id) =>
       set((state) => ({
         posts: state.posts.filter((post) => post.id !== id),
+      })),
+    editPost: (id: string, post: any) =>
+      set((state) => ({
+        posts: state.posts.map((post) =>
+          post.id === id ? { ...post, ...post } : post,
+        ),
       })),
   }),
 );

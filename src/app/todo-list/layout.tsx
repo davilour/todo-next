@@ -9,12 +9,12 @@ export default async function Layout({
 }>) {
   return (
     <>
-      <body className="antialiased bg-gray-900">
+      <div className="antialiased bg-gray-900">
         <>
           {navbar}
           {children}
         </>
-      </body>
+      </div>
     </>
   );
 }

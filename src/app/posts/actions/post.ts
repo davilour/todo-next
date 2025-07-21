@@ -5,9 +5,17 @@ import * as mutations from "@/graphql/mutations";
 import { Post } from "@/API";
 import { revalidatePath } from "next/cache";
 
-export const listposts = async (): Promise<Post[]> => {
+export const listPosts = async (): Promise<Post[]> => {
     const { data } = await amplifyApi.graphql({ query: queries.listPosts });
     return data.listPosts.items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+};
+
+export const fetchPostById = async (id: string): Promise<Post | null> => {
+    const { data } = await amplifyApi.graphql({
+        query: queries.getPost,
+        variables: { id }
+    });
+    return data.getPost ?? null;
 };
 
 export const createposts = async (title: string, content: string) => {
