@@ -5,7 +5,7 @@ export default async function Layout({
   navbar,
 }: Readonly<{
   children: React.ReactNode;
-  navbar: React.ReactNode;
+  navbar?: React.ReactNode;
 }>) {
   return (
     <>
