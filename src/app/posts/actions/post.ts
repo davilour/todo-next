@@ -58,7 +58,7 @@ export const Deleteposts = async (id: string) => {
             input: { id }
         },
     });
-    revalidatePath('/post');
+    revalidatePath('/blog');
 };
 
 export const Editposts = async (id: string, title: string, content: string) => {

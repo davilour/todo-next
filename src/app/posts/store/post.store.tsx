@@ -24,10 +24,10 @@ export const usePostStore = create<PostStore>()(
       set((state) => ({
         posts: state.posts.filter((post) => post.id !== id),
       })),
-    editPost: (id: string, post: any) =>
+    editPost: (id: string, updated: Post) =>
       set((state) => ({
         posts: state.posts.map((post) =>
-          post.id === id ? { ...post, ...post } : post,
+          post.id === id ? { ...post, ...updated } : post,
         ),
       })),
   }),
