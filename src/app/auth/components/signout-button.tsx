@@ -18,8 +18,8 @@ export const SignoutButton = () => {
   };
 
   return (
-    <div className="">
-      <Button type="submit" className=" bg-fuchsia-700" onClick={handleSignOut}>
+    <div>
+      <Button type="button" className=" bg-fuchsia-700 cursor-pointer" onClick={handleSignOut}>
         Logout
       </Button>
     </div>

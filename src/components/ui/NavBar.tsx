@@ -27,7 +27,6 @@ export async function Navbar() {
           <Link href="/posts">
             <Button
               className="hover:bg-gray-800 hover:text-white transition-colors duration-200 cursor-pointer"
-            
             >
               Posts
             </Button>
