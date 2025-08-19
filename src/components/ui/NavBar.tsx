@@ -17,7 +17,7 @@ export async function Navbar() {
           <Link href="/todo-list">
             <Button
               className="hover:bg-gray-800 hover:text-white transition-colors duration-200 cursor-pointer"
-              
+
             >
               Todo List
             </Button>

@@ -7,7 +7,7 @@ type ButtonStates = {
 };
 
 export const useButtonState = create<ButtonStates>((set) => ({
-    locked: false,
-    lock: () => set({locked: true}),
-    unlock: () => set({locked: false}),
+  locked: false,
+  lock: () => set({ locked: true }),
+  unlock: () => set({ locked: false }),
 }))
