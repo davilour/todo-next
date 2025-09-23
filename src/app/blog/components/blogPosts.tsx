@@ -13,7 +13,7 @@ export default function BlogPosts({ initialPosts }: { initialPosts: Post[] }) {
           initialPosts.map((post) => (
             <Link href={`/blog/${post.id}`} key={post.id}>
               <div className="hover:bg-gray-300 p-4 rounded transition cursor-pointer bg-gray-100">
-                <h2 className="text-black">{post.title}</h2>
+                <h2 className="text-blue">{post.title}</h2>
               </div>
             </Link>
           ))
