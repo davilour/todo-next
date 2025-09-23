@@ -1,0 +1,20 @@
+name: Discord Commit Alerts
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Discord
+        run: |
+          COMMIT_MESSAGE=$(jq -r .head_commit.message < $GITHUB_EVENT_PATH)
+          AUTHOR=$(jq -r .head_commit.author.username < $GITHUB_EVENT_PATH)
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "{\"content\":\"🔔 Novo commit por **$AUTHOR**: $COMMIT_MESSAGE\"}" \
+               ${{ secrets.DISCORD_WEBHOOK }}
