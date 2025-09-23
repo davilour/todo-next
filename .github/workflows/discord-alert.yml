@@ -1,0 +1,21 @@
+name: Discord Notify
+
+on:
+  push:
+    branches:
+      - dev  
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Discord
+        run: |
+          AUTHOR=$(git log -1 --pretty=format:'%an')
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "{\"content\":\"🔔 Novo commit por **$AUTHOR**: $COMMIT_MESSAGE\"}" \
+               $DISCORD_WEBHOOK
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEEBHOOK }}
