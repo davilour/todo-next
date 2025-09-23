@@ -30,13 +30,13 @@ export const DeleteButton = ({ id }: { id: string }) => {
   return (
     <div>
       {isPending ? (
-        <Button className="text-sm text-muted-foreground animate-pulse">
+        <Button className="text-md text-muted-foreground animate-pulse">
           Removendo...
         </Button>
       ) : (
         <Button
           disabled={isPending}
-          className="bg-red-500 text-white py-2 rounded"
+          className="bg-red-700 text-white py-4"
           onClick={() => handleDelete()}
         >
           {isPending ? "Removendo..." : "Remover"}

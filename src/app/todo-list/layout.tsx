@@ -7,7 +7,7 @@ export default async function Layout({
 }>) {
   return (
     <>
-      <div className="antialiased bg-gray-900">
+      <div className="antialiased bg-gray-300">
         <>
           {children}
         </>
