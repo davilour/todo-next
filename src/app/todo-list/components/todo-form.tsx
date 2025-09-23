@@ -25,8 +25,8 @@ export const TodoForm = () => {
   const { addTodo, removeTodo, updateTodo } = useTodoStore();
 
   const formSchema = z.object({
-    content: z.string().min(2, {
-      message: "Todo must be at least 2 characters.",
+    content: z.string().min(4, {
+      message: "Todo must be at least 4 characters.",
     }),
   });
 
@@ -76,13 +76,13 @@ export const TodoForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    className="bg-gray-200"
+                    className="bg-gray-300"
                     placeholder="Insert a to-do here"
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>This is your todo.</FormDescription>
-                <FormMessage className="text-red-500 text-sm font-medium" />
+                <FormMessage className="text-red-400 text-sm font-medium" />
               </FormItem>
             )}
           />

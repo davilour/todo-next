@@ -34,7 +34,7 @@ export const EditButton = ({
   return (
     <Button
       disabled={isPending}
-      className="bg-blue-500 text-white py-2 rounded"
+      className="bg-blue-300 text-white py-2 rounded"
       onClick={() => handleEdit()}
     >
       {isEditing ? (isPending ? "Salvando..." : "Salvar") : "Editar"}

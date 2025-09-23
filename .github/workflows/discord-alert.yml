@@ -3,19 +3,29 @@ name: Discord Notify
 on:
   push:
     branches:
-      - dev  
+      - dev
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
       - name: Send message to Discord
         run: |
           AUTHOR=$(git log -1 --pretty=format:'%an')
           COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
+          
+          # Escapando as aspas da mensagem do commit para evitar quebrar o JSON
+          COMMIT_MESSAGE_ESCAPED=$(echo "$COMMIT_MESSAGE" | sed 's/"/\\"/g')
+
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\":\"🔔 Novo commit por **$AUTHOR**: $COMMIT_MESSAGE\"}" \
+               -d "{\"content\":\"🔔 Novo commit em **dev** por **$AUTHOR**: $COMMIT_MESSAGE_ESCAPED\"}" \
                $DISCORD_WEBHOOK
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
